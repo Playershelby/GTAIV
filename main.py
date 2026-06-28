@@ -188,6 +188,7 @@ def termos_uso():
 @app.route("/política", methods=["GET"])
 def politica_privacidade():
     return render_template("PoliticaPriv.html")
+
 # Executa o servidor Flask
 if __name__ == "__main__":
     app.run(debug=True)
