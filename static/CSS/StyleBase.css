@@ -1,0 +1,621 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        /* Efeito de partículas/estrelas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ff6b35;
+            border-radius: 50%;
+            animation: float 15s infinite;
+            opacity: 0.6;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+        /* Header */
+        .header {
+            position: relative;
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, rgba(255, 107, 53, 0.1) 0%, transparent 100%);
+            z-index: 1;
+        }
+        .logo-container {
+            margin: 0 auto;
+            justify-content: center;
+        }
+        .logo-video {
+            padding: 10px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 2rem;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+        .subtitle {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ff6b35;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Contador */
+        .countdown-section {
+            position: relative;
+            z-index: 1;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .countdown-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: #ff6b35;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .countdown-item {
+            background: linear-gradient(145deg, #1e1e2f, #2a2a4a);
+            border: 2px solid #ff6b35;
+            border-radius: 15px;
+            padding: 25px 35px;
+            min-width: 120px;
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+        }
+        .countdown-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 60px;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+        .countdown-label {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+        /* Seção Principal */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .prize-card {
+            background: linear-gradient(145deg, #1a1a2e, #252545);
+            border-radius: 30px;
+            padding: 50px;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .prize-card::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff6b35, #00d4ff, #ff6b35);
+            border-radius: 32px;
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+        }
+        @keyframes borderGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .prize-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .prize-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 2rem;
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.3);
+        }
+        .prize-placeholder {
+            width: 100%;
+            max-height: 800px;
+            background: linear-gradient(135deg, #2a2a4a, #1a1a2e);
+            border-radius: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: #ff6b35;
+            border: 2px dashed #ff6b35;
+        }
+        .prize-details {
+            text-align: center;
+        }
+        .prize-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ff6b35, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .prize-description {
+            font-size: 18px;
+            color: #aaa;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        .prize-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+        .feature-icon {
+            font-size: 24px;
+        }
+        /* Seção de Compra */
+        .purchase-section {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .purchase-card {
+            background: linear-gradient(145deg, #1e1e2f, #2a2a4a);
+            border-radius: 25px;
+            padding: 50px;
+            text-align: center;
+            border: 2px solid #333;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+        }
+        .purchase-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 42px;
+            color: #ff6b35;
+            margin-bottom: 30px;
+        }
+        .price-display {
+            margin-bottom: 40px;
+        }
+        .price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 72px;
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        }
+        .price-label {
+            font-size: 18px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        /* Seletor de Quantidade */
+        .quantity-selector {
+            margin-bottom: 40px;
+        }
+        .quantity-label {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .quantity-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .qty-btn {
+            background: linear-gradient(145deg, #2a2a4a, #1e1e2f);
+            border: 2px solid #444;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+        .qty-btn:hover, .qty-btn.active {
+            border-color: #ff6b35;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+            transform: translateY(-2px);
+        }
+        .qty-btn.active {
+            background: linear-gradient(145deg, #ff6b35, #f7931e);
+            color: #000;
+            font-weight: bold;
+        }
+        .custom-qty {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .custom-qty input {
+            background: #1a1a2e;
+            border: 2px solid #444;
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            width: 100px;
+            text-align: center;
+        }
+        .custom-qty input:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+        .total-display {
+            background: linear-gradient(145deg, #1a1a2e, #252545);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+        }
+        .total-label {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .total-amount {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: #00d4ff;
+        }
+        /* Formulário */
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .form-group input {
+            width: 100%;
+            background: #1a1a2e;
+            border: 2px solid #333;
+            color: #fff;
+            padding: 18px 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+        /* Métodos de Pagamento */
+        .payment-methods {
+            margin-bottom: 40px;
+        }
+        .payment-title {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .payment-option {
+            background: linear-gradient(145deg, #2a2a4a, #1e1e2f);
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 25px 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            min-width: 150px;
+        }
+        .payment-option:hover, .payment-option.selected {
+            border-color: #00d4ff;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+        }
+        .payment-option.selected {
+            background: linear-gradient(145deg, #00d4ff20, #00d4ff10);
+        }
+        .payment-icon {
+            font-size: 36px;
+        }
+        .payment-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+        /* Botão de Compra */
+        .buy-button {
+            width: 100%;
+            background: linear-gradient(90deg, #ff6b35, #f7931e, #ffcc00);
+            border: none;
+            color: #000;
+            padding: 25px 50px;
+            border-radius: 15px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);
+        }
+        .buy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.6);
+        }
+        .buy-button:active {
+            transform: translateY(0);
+        }
+        /* Informações Adicionais */
+        .info-section {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .info-card {
+            background: linear-gradient(145deg, #1e1e2f, #2a2a4a);
+            border-radius: 20px;
+            padding: 35px;
+            border: 1px solid #333;
+            transition: transform 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        .info-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .info-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: #ff6b35;
+            margin-bottom: 15px;
+        }
+        .info-text {
+            font-size: 16px;
+            color: #888;
+            line-height: 1.6;
+        }
+        /* Números da Rifa */
+        .numbers-section {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .numbers-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 42px;
+            color: #ff6b35;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 10px;
+        }
+        .number-slot {
+            aspect-ratio: 1;
+            background: linear-gradient(145deg, #2a2a4a, #1e1e2f);
+            border: 2px solid #333;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .number-slot.available:hover {
+            border-color: #00d4ff;
+            color: #00d4ff;
+            transform: scale(1.05);
+        }
+        .number-slot.selected {
+            background: linear-gradient(145deg, #00d4ff, #0099cc);
+            border-color: #00d4ff;
+            color: #000;
+        }
+        .number-slot.sold {
+            background: linear-gradient(145deg, #ff6b35, #cc5500);
+            border-color: #ff6b35;
+            color: #000;
+            cursor: not-allowed;
+        }
+        /* Footer */
+        .footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #333;
+            margin-top: 60px;
+        }
+        .footer-text {
+            color: #666;
+            font-size: 14px;
+        }
+        .footer-links {
+            margin-top: 20px;
+        }
+        .footer-links a {
+            color: #ff6b35;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: #00d4ff;
+        }
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: linear-gradient(145deg, #1e1e2f, #2a2a4a);
+            border-radius: 25px;
+            padding: 50px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid #ff6b35;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 30px;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .modal-close:hover {
+            color: #ff6b35;
+        }
+        .modal-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+        .pix-code {
+            background: #1a1a2e;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 14px;
+            color: #fff;
+            border: 1px solid #333;
+        }
+        .copy-btn {
+            background: linear-gradient(90deg, #00d4ff, #0099cc);
+            border: none;
+            color: #000;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .gta-logo {
+                font-size: 80px;
+            }
+            .gta-vi {
+                font-size: 50px;
+            }
+            .countdown-item {
+                min-width: 80px;
+                padding: 15px 20px;
+            }
+            .countdown-number {
+                font-size: 40px;
+            }
+            .prize-card {
+                padding: 30px;
+            }
+            .prize-title {
+                font-size: 36px;
+            }
+            .purchase-card {
+                padding: 30px;
+            }
+            .price {
+                font-size: 56px;
+            }
+            .buy-button {
+                font-size: 24px;
+                padding: 20px 30px;
+            }
+        }

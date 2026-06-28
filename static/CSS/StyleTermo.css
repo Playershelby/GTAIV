@@ -1,0 +1,126 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        /* Efeito de partículas/estrelas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ff6b35;
+            border-radius: 50%;
+            animation: float 15s infinite;
+            opacity: 0.6;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+        /* Header */
+        .header {
+            position: relative;
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, rgba(255, 107, 53, 0.1) 0%, transparent 100%);
+            z-index: 1;
+        }
+        h1{
+            font-size: 36pt;
+            font-weight: bold;
+            font-family: 'Roboto', sans-serif;
+            color: #ff6b35;
+            text-align: center;
+        }
+        /* Section Termos de Uso */
+        .terms-section {
+            max-width: 900px;
+            max-height: 100%;
+            margin: 20px auto;
+            font-size: 16px;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0,
+            0, 0.3);
+        }
+        .TextoTermo {
+            max-width: 850px; 
+            max-height: 550px; 
+            overflow-y: auto; 
+            border: 1px solid #ccc; 
+            border-radius: 2rem; 
+            padding: 10px;
+        }
+        .TextoTermo p {
+            font-size: 12pt;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            text-align: justify;
+        }
+        .terms-content {
+            margin-top: 25px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        .terms-content subtitle {
+            font-size: 16pt;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .terms-content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            text-align: justify;
+        }
+        .terms-content p {
+            font-size: 14pt;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            text-align: center;
+        }
+        .terms-content li {
+            margin-bottom: 10px;
+        }
+        .accept-button {
+            display: block;
+            width: 80%;
+            padding: 12px;
+            margin-top: 20px;
+            margin: 0 auto;
+            background-color: #ff6b35;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            font-size: 16pt;
+            cursor: pointer;
+        }
+        .accept-button:hover {
+            background-color: #e55b2c;
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }

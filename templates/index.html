@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href= "{{ url_for('static', filename='CSS/StyleBase.css') }}">
+        <title> GTA IV</title>
+    </head>
+    <body>
+        <!-- Partículas -->
+        <div class="particles" id="particles"></div>
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <video autoplay muted loop playsinline class="logo-video"> 
+                    <source src="{{ url_for('static', filename='CSS/IMG/GTAVI_Official_Cover_Art_Landscape.mp4') }}" type="video/mp4">
+                </video>
+            </div>
+            <p class="subtitle">🎮 Rifa da Licença Original Ultimate Edition 🎮</p>
+        </header>
+        <!-- Contador Regressivo -->
+        <section class="countdown-section">
+            <h2 class="countdown-title">⏰ Sorteio em</h2>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Dias</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+        </section>
+        <!-- Prêmio -->
+        <section class="main-content">
+            <div class="prize-card">
+                <div class="prize-image">
+                    <div class="prize-placeholder">
+                        <img src="{{ url_for('static', filename='CSS/IMG/Jason_and_Lucia_01_With_Logos_landscape.jpg') }}" alt="GTA VI">
+                    </div>
+                </div>
+                <div class="prize-details">
+                    <h1 class="prize-title">Licença Original GTA VI Ultimate Edition</h1>
+                    <p class="prize-description">
+                        Concorra a uma licença original do jogo mais aguardado da história! 
+                        GTA VI promete revolucionar o mundo dos games com gráficos incríveis, 
+                        história envolvente e o mapa mais detalhado já criado pela Rockstar Games.
+                    </p>
+                    <div class="prize-features">
+                        <div class="feature">
+                            <span class="feature-icon">✅</span>
+                            <span>Licença 100% Original</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🏆</span>
+                            <span>Ultimate Edition</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🌎</span>
+                            <span>Envio Digital Imediato</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🔒</span>
+                            <span>Transação Segura</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Seção de Compra -->
+        <section class="purchase-section">
+            <div class="purchase-card">
+                <h2 class="purchase-title">🎟️ Garanta Seus Números</h2>
+                
+                <div class="price-display">
+                    <div class="price-label">Cada número por apenas</div>
+                    <div class="price">R$ 10,00</div>
+                </div>
+                <div class="quantity-selector">
+                    <span class="quantity-label">Quantos números você quer?</span>
+                    <div class="quantity-buttons">
+                        <button class="qty-btn" data-qty="1">1</button>
+                        <button class="qty-btn" data-qty="3">3</button>
+                        <button class="qty-btn active" data-qty="5">5</button>
+                        <button class="qty-btn" data-qty="10">10</button>
+                        <button class="qty-btn" data-qty="20">20</button>
+                    </div>
+                    <div class="custom-qty">
+                        <span>Ou digite:</span>
+                        <input type="number" id="customQty" min="1" max="100" placeholder="Qtd">
+                    </div>
+                </div>
+                <div class="total-display">
+                    <div class="total-label">Total a pagar:</div>
+                    <div class="total-amount" id="totalAmount">R$ 50,00</div>
+                </div>
+                <form id="purchaseForm">
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" id="name" name="name" required placeholder="Seu nome completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">WhatsApp</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="(00) 00000-0000">
+                    </div>
+                    <!-- Container para o botão de pagamento -->
+                    <div id="walletBrick_container">
+                        <button type="submit" class="buy-button">
+                            🎰 Comprar Agora 🎰
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- Números da Rifa -->
+        <section class="numbers-section">
+            <h2 class="numbers-title">📋 Números Disponíveis</h2>
+            <div class="numbers-grid" id="numbersGrid">
+                <!-- Números serão inseridos via JavaScript -->
+            </div>
+        </section>
+        <!-- Informações -->
+        <section class="info-section">
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">📅</div>
+                    <h3 class="info-title">Data do Sorteio</h3>
+                    <p class="info-text">
+                        O sorteio será realizado no dia <strong>19 de Novembro de 2026</strong>, 
+                        às 20h, ao vivo pelo Instagram.
+                    </p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🎲</div>
+                    <h3 class="info-title">Como Funciona</h3>
+                    <p class="info-text">
+                        Cada número comprado é uma chance de ganhar. 
+                        O sorteio será feito de forma transparente e aleatória.
+                    </p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🏆</div>
+                    <h3 class="info-title">Entrega do Prêmio</h3>
+                    <p class="info-text">
+                        O ganhador receberá a licença digital por e-mail 
+                        em até 24 horas após o sorteio.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">
+                © 2026 Rifa GTA VI - Todos os direitos reservados a XPlay Games. Este site não é afiliado à Rockstar Games ou Take-Two Interactive.
+            </p>
+            <div class="footer-links">
+                <a href="/termos">Termos de Uso</a>
+                <a href="/política">Política de Privacidade</a>
+                <a href="1 (833) 816-2095">Contato</a>
+            </div>
+        </footer>
+        <!-- Scripts -->
+        <script>
+            window.APP_CONFIG = {
+                mpPublicKey: "{{ mp_public_key }}",
+                pricePerNumber: Number("{{ price_per_number }}")
+            };
+        </script>
+        <script src="https://sdk.mercadopago.com/js/v2"></script>
+    </body>
+    <script src="{{ url_for('static', filename='Script/index.js') }}"></script>
+</html>
