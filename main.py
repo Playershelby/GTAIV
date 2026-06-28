@@ -2,6 +2,7 @@ import mimetypes
 from flask import Flask, request, jsonify, render_template
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
+import os
 import mercadopago
 from config import (
     MERCADO_PAGO_ACCESS_TOKEN,
@@ -18,7 +19,10 @@ app = Flask(__name__)
 # ... (resto do seu código continua exatamente igual)
 
 # 1. Configuração do SQLAlchemy
-DATABASE_URL = "sqlite:///meubanco.db"
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "sqlite:///meubanco.db"
+)
 engine = create_engine(DATABASE_URL, echo=True)
 Base = declarative_base()
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
