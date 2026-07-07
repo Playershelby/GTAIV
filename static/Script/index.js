@@ -78,9 +78,9 @@ function selectNumber(slot) {
 
 function updateSelectedNumbers() {
     const selected = document.querySelectorAll('.number-slot.selected');
-    selectedQuantity = selected.length || 1;
+    selectedQuantity = selected.length;
     document.querySelectorAll('.qty-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById('customQty').value = '';
+    document.getElementById('customQty').value = selected.length ? String(selected.length) : '';
     updateTotal();
 }
 
@@ -114,18 +114,24 @@ function setupEventListeners() {
         });
     });
 
-    document.getElementById('purchaseForm').addEventListener('submit', handlePurchase);
+    const purchaseForm = document.getElementById('purchaseForm');
+    if (purchaseForm) {
+        purchaseForm.addEventListener('submit', handlePurchase);
+    }
 
-    document.getElementById('phone').addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 11) value = value.slice(0, 11);
-        if (value.length > 6) {
-            value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
-        } else if (value.length > 2) {
-            value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
-        }
-        e.target.value = value;
-    });
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length > 6) {
+                value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+            } else if (value.length > 2) {
+                value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+            }
+            e.target.value = value;
+        });
+    }
 
     window.onclick = function(event) {
         const modal = document.getElementById('pixModal');
@@ -143,17 +149,31 @@ function updateTotal() {
 async function handlePurchase(e) {
     e.preventDefault();
 
+    const selectedNumbers = Array.from(document.querySelectorAll('.number-slot.selected'))
+        .map(el => parseInt(el.textContent, 10))
+        .filter(n => !Number.isNaN(n));
+
     const formData = {
         name: document.getElementById('name').value.trim(),
         email: document.getElementById('email').value.trim(),
         phone: document.getElementById('phone').value.trim(),
         quantity: selectedQuantity,
-        paymentMethod: selectedPayment
+        paymentMethod: selectedPayment,
+        selected_numbers: selectedNumbers
     };
 
     if (!formData.name || !formData.email || !formData.phone) {
         alert('Preencha todos os campos obrigatórios.');
         return;
+    }
+
+    if (selectedNumbers.length === 0) {
+        alert('Selecione ao menos um número para participar do sorteio.');
+        return;
+    }
+
+    if (formData.quantity !== selectedNumbers.length) {
+        formData.quantity = selectedNumbers.length;
     }
 
     try {

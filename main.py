@@ -10,7 +10,7 @@ from config import (
     PRICE_PER_NUMBER,
 )
 
-sdk = mercadopago.SDK(MERCADO_PAGO_ACCESS_TOKEN)
+sdk = mercadopago.SDK("APP_USR-5663590239019254-070621-4746a7410d1bbd7babae74306b0f9ca8-3500885824")
 
 # Adicione esta linha logo antes de inicializar o app Flask:
 mimetypes.add_type('text/css', '.css')
@@ -38,10 +38,24 @@ class Cliente(Base):
     nome = Column(String(100), nullable=False)
     email = Column(String(100), unique=True, index=True, nullable=False)
     phone = Column(String(20), nullable=True)                  # Mudado para phone
+    numeros_escolhidos = Column(String(255), nullable=True)
     status_pagamento = Column(String(20), default="não pago")
 
 # Cria a tabela no banco caso ela não exista
 Base.metadata.create_all(bind=engine)
+
+# Migração simples para SQLite local: adiciona coluna se ainda não existir
+if DATABASE_URL.startswith("sqlite:///"):
+    db_file_path = DATABASE_URL.replace("sqlite:///", "", 1)
+    if os.path.exists(db_file_path):
+        with engine.connect() as conn:
+            columns_result = conn.exec_driver_sql("PRAGMA table_info(clientes)")
+            existing_columns = [row[1] for row in columns_result.fetchall()]
+            if "numeros_escolhidos" not in existing_columns:
+                conn.exec_driver_sql(
+                    "ALTER TABLE clientes ADD COLUMN numeros_escolhidos VARCHAR(255)"
+                )
+                conn.commit()
 
 # 3. Rotas da API Flask
 
@@ -57,12 +71,22 @@ def criar_cliente():
     if not dados or "name" not in dados or "email" not in dados:
         return jsonify({"erro": "Nome e email são obrigatórios"}), 400
 
+    selected_numbers = dados.get("selected_numbers")
+    if not isinstance(selected_numbers, list) or len(selected_numbers) == 0:
+        return jsonify({"erro": "Selecione ao menos um número para participar do sorteio"}), 400
+
+    try:
+        selected_numbers = [int(n) for n in selected_numbers]
+    except (TypeError, ValueError):
+        return jsonify({"erro": "Lista de números selecionados inválida"}), 400
+
     db = SessionLocal()
     try:
         novo_cliente = Cliente(
             nome=dados["name"],
             email=dados["email"],
             phone=dados.get("phone"),
+            numeros_escolhidos=",".join(str(n) for n in selected_numbers),
             status_pagamento="não pago"  # Todo cliente inicia como 'não pago'
         )
         db.add(novo_cliente)
@@ -85,17 +109,23 @@ def listar_clientes():
     db = SessionLocal()
     clientes = db.query(Cliente).all()
     db.close()
-    
+
     resultado = []
-    for c in clientes:
-        resultado.append({
+    resultado.extend(
+        {
             "id": c.id,
             "nome": c.nome,
             "email": c.email,
             "phone": c.phone,
-            "status_pagamento": c.status_pagamento
-        })
-        
+            "numeros_escolhidos": (
+                [int(n) for n in c.numeros_escolhidos.split(",")]
+                if c.numeros_escolhidos
+                else []
+            ),
+            "status_pagamento": c.status_pagamento,
+        }
+        for c in clientes
+    )
     return jsonify(resultado), 200
 
 # Rota principal que vai renderizar o seu arquivo index.html
