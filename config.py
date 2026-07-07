@@ -17,3 +17,4 @@ class Cliente(Base):
     email = Column(String(100), unique=True, index=True, nullable=False)
     phone = Column(String(20), nullable=True)
     status_pagamento = Column(String(20), default="não pago")
+    numeros_escolhidos = Column(String(255), nullable=True)  # Adicionada a coluna numeros_escolhidos
