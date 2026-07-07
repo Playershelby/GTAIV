@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 // Configurar Mercado Pago
 mercadopago.configure({
-    access_token: 'APP_USR-52219040370356-062721-892f99da7948034721ca6ea95f22cce6-231703249'
+    access_token: process.env.ACCESS_TOKEN
 });
 // Criar preferência de pagamento (Cartão)
 app.post('/create-preference', async (req, res) => {
